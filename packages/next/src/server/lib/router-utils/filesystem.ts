@@ -157,8 +157,8 @@ export async function setupFsCheck(opts: {
 
     try {
       for (const file of await recursiveReadDir(publicFolderPath)) {
-        // Ensure filename is encoded and normalized.
-        publicFolderItems.add(encodeURI(normalizePathSep(file)))
+        // Ensure filename is normalized.
+        publicFolderItems.add(normalizePathSep(file))
       }
     } catch (err: any) {
       if (err.code !== 'ENOENT') {
@@ -168,8 +168,8 @@ export async function setupFsCheck(opts: {
 
     try {
       for (const file of await recursiveReadDir(legacyStaticFolderPath)) {
-        // Ensure filename is encoded and normalized.
-        legacyStaticFolderItems.add(encodeURI(normalizePathSep(file)))
+        // Ensure filename is normalized.
+        legacyStaticFolderItems.add(normalizePathSep(file))
       }
       Log.warn(
         `The static directory has been deprecated in favor of the public directory. https://nextjs.org/docs/messages/static-dir-deprecated`
@@ -182,9 +182,9 @@ export async function setupFsCheck(opts: {
 
     try {
       for (const file of await recursiveReadDir(nextStaticFolderPath)) {
-        // Ensure filename is encoded and normalized.
+        // Ensure filename is normalized.
         nextStaticFolderItems.add(
-          path.posix.join('/_next/static', encodeURI(normalizePathSep(file)))
+          path.posix.join('/_next/static', normalizePathSep(file))
         )
       }
     } catch (err) {
